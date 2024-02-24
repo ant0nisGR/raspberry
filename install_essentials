@@ -1,0 +1,97 @@
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt install neofetch neovim screen -y
+#sudo apt autoremove -y
+#sudo apt clean
+
+echo "alias ll='ls -lh'" >> .bashrc
+echo "neofetch" >> .bashrc
+source .profile
+
+mkdir -pv ~/.config/nvim
+
+cat <<EOT >> ~/.config/nvim/init.vim
+set go=a
+set mouse=a
+set nohlsearch
+
+set number relativenumber
+set clipboard+=unnamedplus
+
+set nocompatible
+:filetype plugin on
+syntax on
+
+
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+	set splitbelow splitright
+
+" Enable autocompletion:
+	set wildmode=longest,list,full
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Shortcutting split navigation, saving a keypress:
+	map <C-h> <C-w>h
+	map <C-j> <C-w>j
+	map <C-k> <C-w>k
+	map <C-l> <C-w>l
+
+" Save file as sudo on files that require root permission
+	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+
+inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+""" HTML
+autocmd FileType html,php inoremap ,i <em></em><Space><++><Esc>FeT>i
+autocmd FileType html,php inoremap ,b <b></b><Space><++><Esc>FbT>i
+autocmd FileType html,php inoremap ,h1 <h1></h1><Space><++><Esc>FhT>i
+autocmd FileType html,php inoremap ,h2 <h2></h2><Space><++><Esc>FhT>i
+autocmd FileType html,php inoremap ,h3 <h3></h3><Space><++><Esc>FhT>i
+autocmd FileType html,php inoremap ,p <p></p><Enter><Enter><++><Esc>02kf<i
+autocmd Filetype html,php inoremap ,sp <span<Space>id=""><++></span><++><Esc>F=f"a
+autocmd FileType html,php inoremap ,a <a<Space>target="_blank"<Space>href=""><++></a><Space><++><Esc>14hi
+autocmd FileType html,php inoremap ,im <img<Space>src=""<Space>alt="<++>"><++><Esc>Fcf"a
+autocmd FileType html,php inoremap ,tem <html><Enter><head><Enter><title><++></title><Enter></head><Enter><body><Enter><++><Enter></body><Enter></html><Esc>gg/<++><Enter>"_c4l
+" table
+autocmd FileType html,php inoremap ,tab <table><Enter><tr><Enter><th><++></th><Enter><th><++></th><Enter></tr><Enter><tr><Enter><td><++></td><Enter><td><++></td><Enter></tr><Enter></table><Esc>7k/<++><Enter>"_c4l
+autocmd FileType html,php inoremap ,td <td></td><Enter><++><Esc>1kf/T>i
+autocmd FileType html,php inoremap ,th <th></th><Enter><++><Esc>1kf/T>i
+autocmd FileType html,php inoremap ,tr <tr><Enter><td><++></td><Enter><++><Enter></tr><Esc>2k/<++><Enter>"_c4l
+" font
+autocmd Filetype html,php inoremap ,fc <font<Space>color=""><++></font><++><Esc>F=f"a
+" form
+autocmd FileType html,php inoremap ,fo <form<Space>action=""<Space>method="GET"><Enter><++><Enter></form><Esc>2k0f"a
+autocmd FIleType html,php inoremap ,ft <input<Space>type="text"<Space>id=""<Space>name="<++>"<Space>value="<++>"><Esc>26hi
+autocmd FIleType html,php inoremap ,fb <button<Space>name=""><++></button><++><Esc>F"T"i
+autocmd FIleType html,php inoremap ,fs <input<Space>type="submit"<Space>value=""><++><Esc>F"T"i
+" diafora php
+autocmd FileType php inoremap ,ip <?php echo <++>; ?><Esc>FoT>i
+
+" special chars
+autocmd FileType html,php inoremap ,cel °C<Space>
+
+""" openSCAD
+au BufRead,BufNewFile *.scad    setfiletype openscad
+autocmd FileType openscad inoremap ,tr translate([, <++>, <++>])<Enter><++><Esc>1k0f[a
+autocmd FileType openscad inoremap ,ro rotate([, <++>, <++>])<Enter><++><Esc>1k0f[a
+autocmd FileType openscad inoremap ,sc scale([, <++>, <++>])<Enter><++><Esc>1k0f[a
+" unite
+autocmd FileType openscad inoremap ,df difference(){<Enter><Tab>*<Enter><++><Enter><BackSpace>}<Esc>2k0f*"_c1l
+autocmd FileType openscad inoremap ,in intersection(){<Enter><Tab>*<Enter><++><Enter><BackSpace>}<Esc>2k0f*"_c1l
+autocmd FileType openscad inoremap ,un union(){<Enter><Tab>*<Enter><++><Enter><BackSpace>}<Esc>2k0f*"_c1l
+autocmd FileType openscad inoremap ,mo module *(){<Enter><Tab><++><Enter><BackSpace>}<Esc>2k0f*"_c1l
+" 3D
+autocmd FileType openscad inoremap ,cu cube([*,<Space><++>,<Space><++>],<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
+autocmd FileType openscad inoremap ,cy cylinder(d=*,<Space>h=<++>);<Enter><++><Esc>1k0f*"_c1l
+autocmd FileType openscad inoremap ,co cylinder(h=*,<Space>d1=<++>,<Space>d2=<++>,<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
+autocmd FileType openscad inoremap ,sp sphere(d=*);<Enter><++><Esc>1k0f*"_c1l
+" 2D
+autocmd FileType openscad inoremap ,ci circle(d=*);<Enter><++><Esc>1k0f*"_c1l
+autocmd FileType openscad inoremap ,sq square([*,<Space><++>],<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
+EOT
+
+
+echo rebooting in 15secs..
+echo Ctrl-C to cancel
+sleep 15 && sudo reboot
