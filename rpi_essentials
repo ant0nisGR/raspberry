@@ -7,3 +7,7 @@ sudo apt clean
 echo "alias ll='ls -lh'" >> .bashrc
 echo "neofetch" >> .bashrc
 source .profile
+
+echo rebooting in 15secs..
+echo Ctrl-C to cancel
+sleep 15 && sudo reboot
