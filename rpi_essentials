@@ -1,7 +1,7 @@
 sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt install neofetch neovim screen -y
-sudo apt autoremove
+sudo apt autoremove -y
 sudo apt clean
 
 echo "alias ll='ls -lh'" >> .bashrc
