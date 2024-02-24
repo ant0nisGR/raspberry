@@ -18,27 +18,41 @@ set nohlsearch
 set number relativenumber
 set clipboard+=unnamedplus
 
+" ---- Minimal configuration:
+set smartindent   " Do smart autoindenting when starting a new line
+set shiftwidth=2  " Set number of spaces per auto indentation
+set expandtab     " When using <Tab>, put spaces instead of a <tab> character
+
+" ---- Good to have for consistency
+set tabstop=2   " Number of spaces that a <Tab> in the file counts for
+set smarttab    " At <Tab> at beginning line inserts spaces set in shiftwidth
+
+" ---- Bonus for proving the setting
+" Displays '-' for trailing space, '>-' for tabs and '_' for non breakable space
+set listchars=tab:>-,trail:-,nbsp:_
+set list
+
 set nocompatible
 :filetype plugin on
 syntax on
 
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+set splitbelow splitright
 
 " Enable autocompletion:
-	set wildmode=longest,list,full
+set wildmode=longest,list,full
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 
 inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
