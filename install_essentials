@@ -1,10 +1,10 @@
 sudo apt update -y
 sudo apt full-upgrade -y
-sudo apt install neofetch neovim screen -y
+sudo apt install neofetch neovim screen tree git python3 python3-pip -y
 #sudo apt autoremove -y
 #sudo apt clean
 
-echo "alias ll='ls -lh'" >> .bashrc
+echo "alias ll='ls -lh'" >> .bash_aliases
 echo "neofetch" >> .bashrc
 source .profile
 
