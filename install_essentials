@@ -1,7 +1,7 @@
 install_string="neofetch neovim screen tree git python3 python3-pip"
 install_docker="false"
 
-read -p "Do you want to install Docker [Y/n]? " -n 1 -r
+read -p "Do you want to install Docker [y/n]? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -9,9 +9,9 @@ then
     install_docker="true"
 fi
 
-#sudo apt update -y
-#sudo apt full-upgrade -y
-#sudo apt install $install_string -y
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt install $install_string -y
 
 if [[ $install_docker == "true" ]]
 then
@@ -19,8 +19,6 @@ then
     #sudo usermod -aG docker $USER || error "Failed to add user to the Docker usergroup."
     echo "Remember to logoff/reboot for the changes to take effect."
 fi
-
-exit
 
 #sudo apt autoremove -y
 #sudo apt clean
