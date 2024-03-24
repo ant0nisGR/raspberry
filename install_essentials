@@ -13,7 +13,7 @@ fi
 #sudo apt full-upgrade -y
 #sudo apt install $install_string -y
 
-if [[ install_docker = "true" ]]
+if [[ $install_docker = "true" ]]
 then
     #curl -sSL https://get.docker.com | sh || error "Failed to install Docker."
     #sudo usermod -aG docker $USER || error "Failed to add user to the Docker usergroup."
