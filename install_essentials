@@ -5,7 +5,7 @@ read -p "Do you want to install Docker [y/n]? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    # do dangerous stuff
+    echo "Install Docker = True"
     install_docker="true"
 fi
 
