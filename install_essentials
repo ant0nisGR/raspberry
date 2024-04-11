@@ -24,6 +24,7 @@ fi
 #sudo apt clean
 
 echo "alias ll='ls -lh'" >> .bash_aliases
+echo "alias die='sudo shutdown -h now'" >> .bash_aliases
 echo "neofetch" >> .bashrc
 source .profile
 
