@@ -62,3 +62,28 @@ echo "Done!"
 
 ### modded by TekMaker 26/3/2022
 
+: <<'COMMENT'
+Create a service file to automatically start the sdrpp server
+
+sudo vim /etc/systemd/system/sdrpp-server.service
+
+[Unit]
+Description=SDRpp server
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=20
+User=pi
+WorkingDirectory=/usr/bin
+ExecStart=sdrpp -s
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl enable sdrpp-server
+sudo systemctl start sdrpp-server
+
+COMMENT
+
