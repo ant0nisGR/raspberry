@@ -3,8 +3,7 @@ install_docker="false"
 
 read -p "Do you want to install Docker [y/n]? " -n 1 -r
 echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Install Docker = True"
     install_docker="true"
 fi
@@ -13,20 +12,21 @@ sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt install $install_string -y
 
-if [[ $install_docker == "true" ]]
-then
+if [[ $install_docker == "true" ]]; then
     curl -sSL https://get.docker.com | sh || error "Failed to install Docker."
     sudo usermod -aG docker $USER || error "Failed to add user to the Docker usergroup."
     echo "Remember to logoff/reboot for the changes to take effect."
 fi
 
-#sudo apt autoremove -y
-#sudo apt clean
+sudo apt autoremove -y
+sudo apt clean
 
 echo "alias ll='ls -lh'" >> .bash_aliases
 echo "alias die='sudo shutdown -h now'" >> .bash_aliases
 echo "neofetch" >> .bashrc
 source .profile
+
+if [ ! -f "~/.config/nvim/init.vim" ]; then
 
 mkdir -pv ~/.config/nvim
 
@@ -125,7 +125,7 @@ autocmd FileType openscad inoremap ,sp sphere(d=*);<Enter><++><Esc>1k0f*"_c1l
 autocmd FileType openscad inoremap ,ci circle(d=*);<Enter><++><Esc>1k0f*"_c1l
 autocmd FileType openscad inoremap ,sq square([*,<Space><++>],<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
 oldEOT
-
+fi
 
 echo rebooting in 15secs..
 echo Ctrl-C to cancel
