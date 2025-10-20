@@ -73,8 +73,9 @@ map <C-l> <C-w>l
 
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+EOT
 
-
+: <<oldEOT
 inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
 """ HTML
 autocmd FileType html,php inoremap ,i <em></em><Space><++><Esc>FeT>i
@@ -123,7 +124,7 @@ autocmd FileType openscad inoremap ,sp sphere(d=*);<Enter><++><Esc>1k0f*"_c1l
 " 2D
 autocmd FileType openscad inoremap ,ci circle(d=*);<Enter><++><Esc>1k0f*"_c1l
 autocmd FileType openscad inoremap ,sq square([*,<Space><++>],<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
-EOT
+oldEOT
 
 
 echo rebooting in 15secs..
