@@ -23,7 +23,7 @@ sudo apt clean
 
 echo "alias ll='ls -lh'" >> .bash_aliases
 echo "alias die='sudo shutdown -h now'" >> .bash_aliases
-echo "neofetch" >> .bashrc
+echo "fastfetch" >> .bashrc
 source .profile
 
 if [ ! -f "~/.config/nvim/init.vim" ]; then
