@@ -26,11 +26,11 @@ echo "alias die='sudo shutdown -h now'" >> .bash_aliases
 echo "neofetch" >> .bashrc
 source .profile
 
-if [ ! -f "~/.config/nvim/init.vim" ]; then
+if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
 
-mkdir -pv ~/.config/nvim
+mkdir -pv $HOME/.config/nvim
 
-cat <<EOT >> ~/.config/nvim/init.vim
+cat <<EOT >> $HOME/.config/nvim/init.vim
 set go=a
 set mouse=a
 set nohlsearch
