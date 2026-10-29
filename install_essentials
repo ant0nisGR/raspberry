@@ -1,9 +1,10 @@
 install_docker="false"
 stats_provider="fastfetch"
+
 [ "$(lsb_release -sc | tr '[:upper:]' '[:lower:]')" == "bookworm" ] && stats_provider="neofetch"
-echo $stats_provider
 
 install_string="$stats_provider neovim screen tree git python3 python3-pip samba samba-common-bin"
+echo "List of apps to install: $install_string"
 
 read -p "Do you want to install Docker [y/n]? " -n 1 -r
 echo    # (optional) move to a new line
