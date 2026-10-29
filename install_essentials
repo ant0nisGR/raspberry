@@ -1,11 +1,9 @@
-
+install_docker="false"
 stats_provider="fastfetch"
 [ "$(lsb_release -sc | tr '[:upper:]' '[:lower:]')" == "bookworm" ] && stats_provider="neofetch"
 echo $stats_provider
 
-
 install_string="$stats_provider neovim screen tree git python3 python3-pip samba samba-common-bin"
-install_docker="false"
 
 read -p "Do you want to install Docker [y/n]? " -n 1 -r
 echo    # (optional) move to a new line
@@ -27,9 +25,14 @@ fi
 sudo apt autoremove -y
 sudo apt clean
 
-echo "alias ll='ls -lh'" >> .bash_aliases
+# Add aliases
+echo "alias ll='ls -lh'" > .bash_aliases
 echo "alias die='sudo shutdown -h now'" >> .bash_aliases
-echo "$stats_provider" >> .bashrc
+echo "alias respawn='sudo reboot'" >> .bash_aliases
+
+# Check if $stats_provider already exists in .bashrc. If not, add it
+[ "$(cat .bashrc | grep $stats_provider)" ] && echo "$stats_provider .bashrc entry already exits" || echo $stats_provider | tee -a .bashrc 
+
 source .profile
 
 if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
