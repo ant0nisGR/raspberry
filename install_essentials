@@ -1,4 +1,10 @@
-install_string="neofetch neovim screen tree git python3 python3-pip samba samba-common-bin"
+
+stats_provider="fastfetch"
+[ "$(lsb_release -sc | tr '[:upper:]' '[:lower:]')" == "bookworm" ] && stats_provider="neofetch"
+echo $stats_provider
+
+
+install_string="$stats_provider neovim screen tree git python3 python3-pip samba samba-common-bin"
 install_docker="false"
 
 read -p "Do you want to install Docker [y/n]? " -n 1 -r
@@ -23,7 +29,7 @@ sudo apt clean
 
 echo "alias ll='ls -lh'" >> .bash_aliases
 echo "alias die='sudo shutdown -h now'" >> .bash_aliases
-echo "neofetch" >> .bashrc
+echo "$stats_provider" >> .bashrc
 source .profile
 
 if [ ! -f "$HOME/.config/nvim/init.vim" ]; then
