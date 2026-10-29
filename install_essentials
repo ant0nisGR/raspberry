@@ -13,7 +13,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     install_docker="true"
 fi
 
-sudo apt update -y
+sudo apt update
 sudo apt full-upgrade -y
 sudo apt install $install_string -y
 
@@ -23,16 +23,13 @@ if [[ $install_docker == "true" ]]; then
     echo "Remember to logoff/reboot for the changes to take effect."
 fi
 
-sudo apt autoremove -y
-sudo apt clean
-
 # Add aliases
 echo "alias ll='ls -lh'" > .bash_aliases
 echo "alias die='sudo shutdown -h now'" >> .bash_aliases
 echo "alias respawn='sudo reboot'" >> .bash_aliases
 
 # Check if $stats_provider already exists in .bashrc. If not, add it
-[ "$(cat .bashrc | grep $stats_provider)" ] && echo "$stats_provider .bashrc entry already exits" || echo $stats_provider | tee -a .bashrc 
+[ "$(cat .bashrc | grep $stats_provider)" ] && echo "$stats_provider .bashrc entry already exists" || echo $stats_provider | tee -a .bashrc 
 
 source .profile
 
@@ -136,6 +133,9 @@ autocmd FileType openscad inoremap ,ci circle(d=*);<Enter><++><Esc>1k0f*"_c1l
 autocmd FileType openscad inoremap ,sq square([*,<Space><++>],<Space>center=false);<Enter><++><Esc>1k0f*"_c1l
 oldEOT
 fi
+
+sudo apt autoremove -y
+sudo apt clean
 
 echo rebooting in 15secs..
 echo Ctrl-C to cancel
